@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  api:
+    build:
+      context: ./docker/node
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: be-the-hero_api
+    restart: always
+    command: npm start
+    ports:
+      - "3333:3000"
+    volumes:
+      - ./backend:/usr/app
+      - ./backend/node_modules:/usr/app/node_modules
+  
