@@ -1,16 +1,14 @@
 import connection from '../../database';
 
 class IncidentController {
-  static table = 'incidents';
-
   static async index(req, res) {
     const { page = 1 } = req.query;
     
     try {
-      const [ count ] = await connection(IncidentController.table)
+      const [ count ] = await connection('incidents')
         .count();
       
-      let incidents = await connection(IncidentController.table)
+      let incidents = await connection('incidents')
         .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
         .limit(5)
         .offset((page - 1) * 5)
@@ -35,7 +33,7 @@ class IncidentController {
     const ong_id = req.headers.authorization;
 
     try {
-      const incident = await connection(IncidentController.table)
+      const incident = await connection('incidents')
         .where('id', id)
         .select()
         .first();
@@ -44,7 +42,7 @@ class IncidentController {
         return res.status(401).json({ error: 'Not Authorization' });
       }
 
-      await connection(IncidentController.table).where('id', id).delete();
+      await connection('incidents').where('id', id).delete();
 
       return res.status(204).end();
     } catch {
@@ -57,7 +55,7 @@ class IncidentController {
     const ong_id = req.headers.authorization;
     
     try {
-      const [ id ] = await connection(IncidentController.table)
+      const [ id ] = await connection('incidents')
         .insert({ title, description, value, ong_id });
 
       return res.status(201).json({ id });
