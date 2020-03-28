@@ -1,13 +1,11 @@
 import connection from '../../database';
 
 class SessionController {
-  static table = 'ongs';
-
   static async store(req, res) {
     const { id } = req.body;
 
     try {
-      const ong = await connection(SessionController.table)
+      const ong = await connection('ongs')
         .where('id', id)
         .select('name')
         .first();

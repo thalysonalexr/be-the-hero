@@ -1,13 +1,11 @@
 import connection from '../../database';
 
 class ProfileController {
-  static table = 'incidents'
-
   static async index(req, res) {
     const ong_id = req.headers.authorization;
 
     try {
-      const incidents = await connection(ProfileController.table)
+      const incidents = await connection('incidents')
         .where('ong_id', ong_id)
         .select('*');
 

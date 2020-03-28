@@ -12,14 +12,14 @@ import SessionValidator from './app/validators/SessionValidator';
 
 const router = express.Router();
 
-router.post('/session', SessionValidator.store(), SessionController.store);
-router.get('/profile', ProfileValidator.index(), ProfileController.index);
+router.post('/session', SessionValidator.store(), SessionController.store); // test pass
+router.get('/profile', ProfileValidator.index(), ProfileController.index); // test pass
 
-router.get('/ongs', OngController.index);
-router.post('/ongs', OngValidator.store(), OngController.store);
+router.get('/ongs', OngController.index); // test pass
+router.post('/ongs', OngValidator.store(), OngController.store); // test pass
 
-router.get('/incidents', IncidentValidator.index(), IncidentController.index);
-router.post('/incidents', IncidentValidator.store(), IncidentController.store);
-router.delete('/incidents/:id', IncidentValidator.destroy(), IncidentController.destroy);
+router.get('/incidents', IncidentValidator.index(), IncidentController.index); // test 
+router.post('/incidents', IncidentValidator.store(), IncidentController.store); // test pass
+router.delete('/incidents/:id', IncidentValidator.destroy(), IncidentController.destroy); // test pass
 
 export default router;
